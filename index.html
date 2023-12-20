@@ -34,7 +34,7 @@
         }
         .formulario {      
             min-width: 460px;
-            min-height: 560px;
+            min-height: 460px;
             box-shadow: 0px 0px 20px black;
             border-radius: 20px;
             color: rgb(255, 255, 255);
@@ -83,15 +83,57 @@
             cursor: pointer;
             font-weight: 500;
         }
+
         .boton:hover {
             background-color: white;
             color: black;
         }
+
         .centrarBoton {
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-bottom: 10px;
         } 
+        .form-control input:focus + label span,
+        .form-control input:valid + label span {
+        color: lightblue;
+        transform: translateY(-30px);
+        }
+        .form-control {
+            position: relative;
+            width: 320px;
+          }
+          
+          .form-control input {
+            background-color: transparent;
+            border: 0;
+            border-bottom: 2px #fff solid;
+            display: block;
+            width: 100%;
+            font-size: 18px;
+            color: #fff;
+          }
+          
+          .form-control input:focus,
+          .form-control input:valid {
+            outline: 0;
+            border-bottom-color: lightblue;
+          }
+          
+          .form-control label {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            pointer-events: none;
+          }
+          
+          .form-control label span {
+            display: inline-block;
+            font-size: 18px;
+            min-width: 5px;
+            transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+          }
 
     </style>
 </head>
@@ -100,22 +142,45 @@
         <div class="formulario">
             <h1>Formulario</h1><br>
             <span>
-                <input type="text" placeholder="Nombre" required class="inputNombre">
-                <hr><br>
-                <input type="text" placeholder="Apellido" required class="inputNombre">
-                <hr><br>
-                <input type="email" placeholder="Email" required class="inputNombre">
-                <hr><br>
-                <input type="password" placeholder="Contraseña" required class="inputNombre">
-                <hr><br>
-                <input type="password" placeholder="Confirmar Contraseña" required class="inputNombre">
-                <hr><br><br>
+                <div class="form-control">
+                <input type="text" required class="inputNombre">
+                <label>Nombre</label>
+                </div>
+                <br>
+
+                <div class="form-control">
+                <input type="text" required class="inputNombre">
+                <label>Apellido</label>
+                </div>
+                <br>
+
+                <div class="form-control">
+                <input type="password" required class="inputNombre">
+                <label>Contraseña</label>
+                </div>
+                <br>
+                
+                <div class="form-control">
+                <input type="password" required class="inputNombre">
+                <label>Confirmar Contraseña</label>
+                </div>
+                <br><br>
                 <div class="centrarBoton">
                     <div class="boton">Enviar</div>
                 </div>
             </span>
         </div>
     </section>  
+    <script>
+        const labels = document.querySelectorAll('.form-control label')
+
+    labels.forEach(label => {
+    label.innerHTML = label.innerText
+        .split('')
+        .map((letter, idx) => `<span style="transition-delay:${idx * 50}ms">${letter}</span>`)
+        .join('')
+    })
+    </script>
 </body>
 </html>
 
